@@ -24,7 +24,7 @@
         <div class="am-u-sm-12 am-u-md-3">
             <form method="get">
                 <div class="am-input-group am-input-group-sm">
-                    <input type="text" class="am-form-field" name="keyword" value="">
+                    <input type="text" class="am-form-field" name="keyword" value="{{Request::input('keyword')}}">
                         <span class="am-input-group-btn">
                             <button class="am-btn am-btn-default" type="submit">搜索</button>
                         </span>
@@ -94,17 +94,21 @@
                   @endforeach
                     </tbody>
                 </table>
-                共 21 条记录
-                <div class="am-cf">
+                共 {{$brands->total()}} 条记录
+
                     <div class="am-fr">
-                        <ul class="pagination"><li class="disabled"><span>&laquo;</span></li>
-                            <li class="active"><span>1</span></li>
-                            <li><a href="http://xsystem.phpwh.com/xShop/product?page=2">2</a></li>
-                            <li><a href="http://xsystem.phpwh.com/xShop/product?page=2" rel="next">&raquo;</a></li>
-                        </ul>
+                        {!! $brands->links() !!}
                     </div>
-                </div>
-                <hr/>
+
+
+
+                {{--<div class="container">--}}
+                    {{--@foreach ($brands as $brand)--}}
+                        {{--{{ $brand->name }}--}}
+                    {{--@endforeach--}}
+                {{--</div>--}}
+
+
 
             </form>
         </div>
@@ -112,5 +116,24 @@
 
 </div>
 <!-- content end -->
+@endsection
 
+@section('js')
+    <script type="text/javascript">
+        $(function () {
+            $("input[name='sort_order']").change(function () {
+                var data = {
+                    sort_order: $(this).val(),
+                    id: $(this).parents("tr").data('id')
+                }
+//                console.log(date);
+                $.ajax({
+                    type: "PATCH",
+                    url: "/Shop/brand/sort_order",
+                    data: data,
+                });
+            })
+
+        })
+    </script>
 @endsection

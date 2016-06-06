@@ -10,10 +10,16 @@ use App\Models\Shop\Brand;
 
 class BrandController extends Controller
 {
-    function index()
+    function index(Request $request)
     {
+        $where = function ($query) use ($request) {
+            if ($request->has('keyword') and $request->keyword != '') {
+                $search = "%" . $request->keyword . "%";
+                $query->where('name', 'like', $search);
+            }
+        };
 
-        $brands = Brand::OrderBy('sort_order')->get();
+        $brands = Brand::where($where)->OrderBy('sort_order')->paginate(4);
 //        return $brands;
         return view('Admin/brand/index')->with('brands', $brands);
     }
@@ -52,4 +58,12 @@ class BrandController extends Controller
         $brand->destroy($id);
         return redirect('admin/Shop/brand');
     }
+
+    function sort_order(Request $request)
+    {
+        $brand = Brand::find($request->id);
+        $brand->sort_order = $request->sort_order;
+        $brand->save();
+    }
+
 }

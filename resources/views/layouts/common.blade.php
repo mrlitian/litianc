@@ -14,6 +14,7 @@
     <meta name="apple-mobile-web-app-title" content="Amaze UI" />
     <link rel="stylesheet" href="/amaze/css/amazeui.min.css"/>
     <link rel="stylesheet" href="/amaze/css/admin.css">
+    @yield('css')
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -93,17 +94,14 @@
 
 <a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
 
-<!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
 <script src="/amaze/js/amazeui.ie8polyfill.min.js"></script>
-<![endif]-->
-
-<!--[if (gte IE 9)|!(IE)]><!-->
 <script src="/amaze/js/jquery.min.js"></script>
-<!--<![endif]-->
 <script src="/amaze/js/amazeui.min.js"></script>
 <script src="/amaze/js/app.js"></script>
 <script src="/amaze/js/laravel.js"></script>
+
+@yield('js')
 </body>
 </html>
