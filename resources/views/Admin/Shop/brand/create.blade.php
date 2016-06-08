@@ -34,6 +34,35 @@
 
         <div class="am-g am-margin-top">
             <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                缩略图
+            </div>
+
+
+            <div class="am-u-md-8 am-u-md-4 am-u-end col-end">
+                <div class="am-form-group am-form-file new_thumb">
+                    <button type="button" class="am-btn am-btn-secondary am-btn-sm">
+                        <i class="am-icon-cloud-upload" id="loading"></i> 上传新的缩略图
+                    </button>
+                    <input type="file" id="thumb_upload">
+                </div>
+
+                <div class="select_thumb">
+                    <button type="button" class="am-btn am-btn-success am-btn-sm" id="ck_thumb_upload">
+                        <i class="am-icon-search-plus" id="loading"></i> 选择已存在的缩略图
+                    </button>
+                    <input type="hidden" name="thumb">
+                </div>
+
+                <hr data-am-widget="divider" style="" class="am-divider am-divider-dashed" />
+
+                <div>
+                    <img src="" id="img_show" style="max-height: 200px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="am-g am-margin-top">
+            <div class="am-u-sm-4 am-u-md-2 am-text-right">
                 品牌描述
             </div>
             <div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
@@ -72,4 +101,12 @@
 
 </div>
 <!-- content end -->
+@endsection
+
+
+@section('js')
+    <script src="/amaze/js/jquery.html5-fileupload.js"></script>
+    <script src="/amaze/js/upload.js"></script>
+    <script src="/amaze/js/ckfinder.js"></script>
+    <script src="/amaze/js/ck_upload.js"></script>
 @endsection

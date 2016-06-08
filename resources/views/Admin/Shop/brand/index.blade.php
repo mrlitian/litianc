@@ -65,7 +65,7 @@
                         <td>{{$brand->describe}}</td>
 
                         <td class="am-hide-sm-only">
-                            <span name="is_show" value="2" data-attr="is_show">{{$brand->is_show}}</span>
+                            {!! is_something('is_show', $brand) !!}
                         </td>
 
                         <td class="am-hide-sm-only">
@@ -95,27 +95,25 @@
                     </tbody>
                 </table>
                 共 {{$brands->total()}} 条记录
-
                     <div class="am-fr">
                         {!! $brands->links() !!}
                     </div>
-
-
-
-                {{--<div class="container">--}}
-                    {{--@foreach ($brands as $brand)--}}
-                        {{--{{ $brand->name }}--}}
-                    {{--@endforeach--}}
-                {{--</div>--}}
-
-
-
             </form>
         </div>
     </div>
 
 </div>
 <!-- content end -->
+@endsection
+@section('css')
+    <style>
+        .am-icon-close{
+            color: red;
+        }
+        .am-icon-check{
+            color: #0000cc;
+        }
+    </style>
 @endsection
 
 @section('js')
@@ -129,11 +127,27 @@
 //                console.log(date);
                 $.ajax({
                     type: "PATCH",
-                    url: "/Shop/brand/sort_order",
+                    url: "/admin/Shop/brand/sort_order",
                     data: data,
                 });
             })
 
+            $(".is_something").click(function () {
+                var _this = $(this);
+                var data = {
+                    id:_this.parents("tr").data('id'),
+                    attr:_this.data('attr')
+                }
+                console.log(data);
+                $.ajax({
+                    type: "PATCH",
+                    url: "/admin/Shop/brand/is_something",
+                    data: data,
+                success: function(){
+                    _this.toggleClass('am-icon-close am-icon-check');
+                 }
+               })
+            })
         })
     </script>
 @endsection
